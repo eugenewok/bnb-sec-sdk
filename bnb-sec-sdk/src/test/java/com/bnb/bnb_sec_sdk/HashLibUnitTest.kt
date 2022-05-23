@@ -1,20 +1,10 @@
 package com.bnb.bnb_sec_sdk
 
 import org.junit.Assert.assertEquals
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TemporaryFolder
+import java.io.File
 
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
 class HashLibUnitTest {
-    @get:Rule
-    var folder = TemporaryFolder()
-
     @Test
     fun `test md5 hash string for hello world matches online md5 generator`() {
         val md5 = HashLib.getStringHash("hello world", HashLib.HashType.MD5)
@@ -35,22 +25,22 @@ class HashLibUnitTest {
 
     @Test
     fun `test calculate file md5 hash string matches online md5 generator`() {
-        val createdFile = folder.newFile("test-hash.txt")
-        val md5 = HashLib.getFileHash(createdFile, HashLib.HashType.MD5)
-        assertEquals("d41d8cd98f00b204e9800998ecf8427e", md5)
+        val file = File("src/test/test-hash.txt")
+        val md5 = HashLib.getFileHash(file, HashLib.HashType.MD5)
+        assertEquals("1397c8e097423f2099d29fc72143b3e6", md5)
     }
 
     @Test
     fun `test calculate file SHA1 hash string matches online SHA1 generator`() {
-        val createdFile = folder.newFile("test-hash.txt")
-        val sha1 = HashLib.getFileHash(createdFile, HashLib.HashType.SHA1)
-        assertEquals("da39a3ee5e6b4b0d3255bfef95601890afd80709", sha1)
+        val file = File("src/test/test-hash.txt")
+        val sha1 = HashLib.getFileHash(file, HashLib.HashType.SHA1)
+        assertEquals("5df9954f1ca26eabf18c663cc9258f7f1fd09f9e", sha1)
     }
 
     @Test
     fun `test calculate file SHA256 hash string matches online SHA256 generator`() {
-        val createdFile = folder.newFile("test-hash.txt")
-        val sha1 = HashLib.getFileHash(createdFile, HashLib.HashType.SHA256)
-        assertEquals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", sha1)
+        val file = File("src/test/test-hash.txt")
+        val sha1 = HashLib.getFileHash(file, HashLib.HashType.SHA256)
+        assertEquals("f250fc8f40aeea3297c0158ec1bfa07b503805f2a822530bd63c50625bb9376b", sha1)
     }
 }
